@@ -1,0 +1,19 @@
+{
+    "name": "phpcraft/database",
+    "type": "library",
+    "description": "database query builder wrapper",
+    "license": "MIT",
+    "authors": [
+	{
+            "name": "vuk"
+	}
+    ],
+    "require": {
+            "usmanhalalit/pixie": "2.*@dev"
+    },
+    "autoload": {
+        "psr-4" : {
+            "PHPCraft\\Database\\" : "src/"
+        }
+    }
+}
