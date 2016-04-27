@@ -108,6 +108,6 @@ class QueryBuilderPixie implements QueryBuilderInterface
      * execs a get statement
      **/
     public function get(){
-        $this->query->get();
+        return $this->query->get();
     }
 }
