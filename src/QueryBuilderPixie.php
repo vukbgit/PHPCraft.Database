@@ -109,7 +109,7 @@ class QueryBuilderPixie implements QueryBuilderInterface
      * execs a get statement
      **/
     public function get(){
-        if($this->fetchMode) $this->queryBuilder->setFetchMode($this->fetchMode);
+        if($this->fetchMode) $this->query->setFetchMode($this->fetchMode);
         return $this->query->get();
     }
 }
