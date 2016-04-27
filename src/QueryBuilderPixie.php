@@ -14,6 +14,7 @@ class QueryBuilderPixie implements QueryBuilderInterface
 
     private $queryBuilder;
     private $query;
+    private $fetchMode;
     
     /**
      * connects to database
@@ -53,7 +54,7 @@ class QueryBuilderPixie implements QueryBuilderInterface
      * @param string $mode, one of PDO predefined constants
      **/
     public function setFetchMode($mode){
-        $this->queryBuilder->setFetchMode($mode);
+        $this->fetchMode = $mode;
     }
     
     /**
@@ -108,6 +109,7 @@ class QueryBuilderPixie implements QueryBuilderInterface
      * execs a get statement
      **/
     public function get(){
+        if($this->fetchMode) $this->queryBuilder->setFetchMode($this->fetchMode);
         return $this->query->get();
     }
 }
