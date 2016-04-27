@@ -48,6 +48,15 @@ class QueryBuilderPixie implements QueryBuilderInterface
     }
     
     /**
+     * sets fetch method to be used by PDO
+     *
+     * @param string $mode, one of PDO predefined constants
+     **/
+    public function setFetchMode($mode){
+        $this->queryBuilder->setFetchMode($mode);
+    }
+    
+    /**
      * sets table/view
      *
      * @param string $table table or view name

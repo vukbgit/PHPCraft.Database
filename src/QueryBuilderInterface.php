@@ -25,6 +25,13 @@ interface QueryBuilderInterface
     public function connect($driver, $host, $database, $username, $password, $charset = false, $collation = false, $options = array());
     
     /**
+     * sets fetch method to be used by PDO
+     *
+     * @param string $mode, one of PDO predefined constants
+     **/
+    public function setFetchMode($mode);
+    
+    /**
      * sets table/view. It should create the internal 'query' object and store it for following operations
      *
      * @param string $table table or view name
