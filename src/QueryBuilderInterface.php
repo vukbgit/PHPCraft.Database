@@ -25,9 +25,26 @@ interface QueryBuilderInterface
     public function connect($driver, $host, $database, $username, $password, $charset = false, $collation = false, $options = array());
     
     /**
-     * sets table/view
+     * sets table/view. It should create the internal 'query' object and store it for following operations
      *
      * @param string $table table or view name
      **/
     public function table($table);
+    
+    /**
+     * outputs query (for debugging purpose)
+     **/
+    public function outputQuery();
+    
+    /**
+     * outputs query (for debugging purpose), shortcut to outputQuery()
+     **/
+    public function oq();
+    
+    /**
+     * orders query
+     * @param string $field
+     * @param string $direction
+     **/
+    public function orderBy($field, $direction);
 }

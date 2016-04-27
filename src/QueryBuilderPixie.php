@@ -13,6 +13,7 @@ class QueryBuilderPixie implements QueryBuilderInterface
 {
 
     private $queryBuilder;
+    private $query;
     
     /**
      * connects to database
@@ -53,6 +54,31 @@ class QueryBuilderPixie implements QueryBuilderInterface
      * @return Pixie\QueryBuilder\QueryBuilderHandler
      **/
     public function table($table){
-        return $this->queryBuilder->table($table);
+        $this->query = $this->queryBuilder->table($table);
+        return $this->query;
+    }
+    
+    /**
+     * outputs query (for debugging purpose)
+     **/
+    public function outputQuery(){
+        r($this->query->getQuery()->getRawSql());
+    }
+    
+    /**
+     * outputs query (for debugging purpose), shortcut to outputQuery()
+     **/
+    public function oq(){
+        $this->outputQuery();
+    }
+
+    /**
+     * orders query
+     * @param string $field
+     * @param string $direction
+     * @return Pixie\QueryBuilder\QueryBuilderHandler
+     **/
+    public function orderBy($field, $direction){
+        return $this->query->orderBy($field, $direction);
     }
 }
