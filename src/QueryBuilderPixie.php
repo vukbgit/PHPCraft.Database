@@ -1,6 +1,8 @@
 <?php
 
-namespace PHPCraft\Template;
+namespace PHPCraft\Database;
+
+use PHPCraft\Database\QueryBuilderInterface;
 
 /**
  * Renders template using Twig (http://twig.sensiolabs.org/)
@@ -9,6 +11,9 @@ namespace PHPCraft\Template;
  */
 class QueryBuilderPixie implements QueryBuilderInterface
 {
+
+    private $queryBuilder;
+    
     /**
      * connects to database
      *
@@ -37,15 +42,17 @@ class QueryBuilderPixie implements QueryBuilderInterface
                     )*/
                     'options'   => $options,
                 );
-        new \Pixie\Connection($driver, $config, 'QB');
+        $connection = new \Pixie\Connection($driver, $config);
+        $this->queryBuilder = new \Pixie\QueryBuilder\QueryBuilderHandler($connection);
     }
     
     /**
      * sets table/view
      *
      * @param string $table table or view name
+     * @return Pixie\QueryBuilder\QueryBuilderHandler
      **/
-    public function setTable($able){
-        QB::table($able);
+    public function table($table){
+        return $this->queryBuilder->table($table);
     }
 }

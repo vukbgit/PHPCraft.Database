@@ -9,7 +9,6 @@ namespace PHPCraft\Database;
  */
 interface QueryBuilderInterface
 {
-    private $query;
     
     /**
      * connects to database
@@ -30,5 +29,5 @@ interface QueryBuilderInterface
      *
      * @param string $table table or view name
      **/
-    public function setTable($able);
+    public function table($table);
 }
