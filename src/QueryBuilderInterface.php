@@ -54,4 +54,9 @@ interface QueryBuilderInterface
      * @param string $direction
      **/
     public function orderBy($field, $direction);
+    
+    /**
+     * execs a get statement
+     **/
+    public function get();
 }

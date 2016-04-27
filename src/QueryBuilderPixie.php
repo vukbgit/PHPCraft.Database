@@ -60,11 +60,9 @@ class QueryBuilderPixie implements QueryBuilderInterface
      * sets table/view
      *
      * @param string $table table or view name
-     * @return Pixie\QueryBuilder\QueryBuilderHandler
      **/
     public function table($table){
         $this->query = $this->queryBuilder->table($table);
-        return $this->query;
     }
     
     /**
@@ -88,6 +86,13 @@ class QueryBuilderPixie implements QueryBuilderInterface
      * @return Pixie\QueryBuilder\QueryBuilderHandler
      **/
     public function orderBy($field, $direction){
-        return $this->query->orderBy($field, $direction);
+        $this->query->orderBy($field, $direction);
+    }
+    
+    /**
+     * execs a get statement
+     **/
+    public function get(){
+        $this->query->get();
     }
 }
