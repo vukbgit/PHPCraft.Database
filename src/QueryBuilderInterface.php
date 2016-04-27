@@ -49,6 +49,14 @@ interface QueryBuilderInterface
     public function oq();
     
     /**
+     * sets a where condition
+     * @param string $field
+     * @param string $operator
+     * @param mixed $value
+     **/
+    public function where($field, $operator = null, $value = null);
+    
+    /**
      * orders query
      * @param string $field
      * @param string $direction

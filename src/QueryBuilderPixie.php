@@ -80,6 +80,21 @@ class QueryBuilderPixie implements QueryBuilderInterface
     }
 
     /**
+     * sets a where condition
+     * @param string $field
+     * @param string $operator
+     * @param mixed $value
+     **/
+    public function where($field, $operator = null, $value = null){
+        // If two params are given then assume operator is =
+        if (func_num_args() == 2) {
+            $value = $operator;
+            $operator = '=';
+        }
+        $this->query->where($field, $operator, $value);
+    }
+    
+    /**
      * orders query
      * @param string $field
      * @param string $direction
