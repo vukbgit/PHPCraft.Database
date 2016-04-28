@@ -97,9 +97,7 @@ interface QueryBuilderInterface
     * handles error messages, for a list of SQLSTATES see for example https://docs.oracle.com/cd/F49540_01/DOC/server.815/a58231/appd.htm
     *
     * @param mixed $exception thrown by adapter
-    *
     * @throws DomainException if there is no logic defined to handle $sqlstate
-    *
     * @return array|null first array element is the type of error, following elements are relevant informations according to error type
     */
     public function handleQueryException($exception);
