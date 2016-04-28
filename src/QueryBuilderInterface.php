@@ -82,6 +82,18 @@ interface QueryBuilderInterface
     public function insert($fields);
     
     /**
+     * execs an update statement
+     * @param array $fields keys are fields names, values are fields values to be saved
+     **/
+    public function update($fields);
+    
+    /**
+     * execs a delete statement
+     * @param array $fields to be used for where condition keys are fields names, values are fields values
+     **/
+    public function delete($fields);
+    
+    /**
     * handles error messages, for a list of SQLSTATES see for example https://docs.oracle.com/cd/F49540_01/DOC/server.815/a58231/appd.htm
     *
     * @param mixed $exception thrown by adapter

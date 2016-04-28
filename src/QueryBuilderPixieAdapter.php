@@ -141,5 +141,25 @@ class QueryBuilderPixieAdapter extends QueryBuilder
         return $this->query->insert($fields);
     }
     
+    /**
+     * execs an update statement
+     * @param array $fields keys are fields names, values are fields values to be saved
+     **/
+    public function update($fields)
+    {
+        return $this->query->update($fields);
+    }
     
+    /**
+     * execs a delete statement
+     * @param array $fields to be used for where condition keys are fields names, values are fields values
+     **/
+    public function delete($fields)
+    {
+        if(empty($fields)) throw new \Exception('A where condition MUST be set for a delete statement');
+        foreach($fields as $field => $value) {
+            $this->where($field, $value);
+        }
+        $this->query->delete();
+    }
 }
