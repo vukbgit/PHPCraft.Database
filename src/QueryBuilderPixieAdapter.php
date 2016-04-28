@@ -28,7 +28,8 @@ class QueryBuilderPixieAdapter implements QueryBuilderInterface
      * @param string $collation
      * @param array $options
      **/
-    public function connect($driver, $host, $database, $username, $password, $charset = 'utf8', $collation = 'utf8_unicode_ci', $options = array()){
+    public function connect($driver, $host, $database, $username, $password, $charset = 'utf8', $collation = 'utf8_unicode_ci', $options = array())
+    {
         $config = array(
                     'driver'    => $driver, // Db driver
                     'host'      => $host,
@@ -53,7 +54,8 @@ class QueryBuilderPixieAdapter implements QueryBuilderInterface
      *
      * @param string $mode, one of PDO predefined constants
      **/
-    public function setFetchMode($mode){
+    public function setFetchMode($mode)
+    {
         $this->fetchMode = $mode;
     }
     
@@ -62,21 +64,34 @@ class QueryBuilderPixieAdapter implements QueryBuilderInterface
      *
      * @param string $table table or view name
      **/
-    public function table($table){
+    public function table($table)
+    {
         $this->query = $this->queryBuilder->table($table);
+    }
+    
+    /**
+     * sets table/view fields to be extracted
+     *
+     * @param array $fields
+     **/
+    public function fields($fields)
+    {
+        $this->query->select($fields);
     }
     
     /**
      * outputs query (for debugging purpose)
      **/
-    public function outputQuery(){
+    public function outputQuery()
+    {
         r($this->query->getQuery()->getRawSql());
     }
     
     /**
      * outputs query (for debugging purpose), shortcut to outputQuery()
      **/
-    public function oq(){
+    public function oq()
+    {
         $this->outputQuery();
     }
 
@@ -86,7 +101,8 @@ class QueryBuilderPixieAdapter implements QueryBuilderInterface
      * @param string $operator
      * @param mixed $value
      **/
-    public function where($field, $operator = null, $value = null){
+    public function where($field, $operator = null, $value = null)
+    {
         // If two params are given then assume operator is =
         if (func_num_args() == 2) {
             $value = $operator;
@@ -101,14 +117,16 @@ class QueryBuilderPixieAdapter implements QueryBuilderInterface
      * @param string $direction
      * @return Pixie\QueryBuilder\QueryBuilderHandler
      **/
-    public function orderBy($field, $direction){
+    public function orderBy($field, $direction)
+    {
         $this->query->orderBy($field, $direction);
     }
     
     /**
      * execs a get statement
      **/
-    public function get(){
+    public function get()
+    {
         if($this->fetchMode) $this->query->setFetchMode($this->fetchMode);
         return $this->query->get();
     }

@@ -39,6 +39,13 @@ interface QueryBuilderInterface
     public function table($table);
     
     /**
+     * sets table/view fields to be extracted
+     *
+     * @param array $fields
+     **/
+    public function fields($fields);
+    
+    /**
      * outputs query (for debugging purpose)
      **/
     public function outputQuery();
