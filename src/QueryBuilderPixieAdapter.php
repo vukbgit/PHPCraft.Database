@@ -9,7 +9,7 @@ use PHPCraft\Database\QueryBuilderInterface;
  *
  * @author vuk <info@vuk.bg.it>
  */
-class QueryBuilderPixie implements QueryBuilderInterface
+class QueryBuilderPixieAdapter implements QueryBuilderInterface
 {
 
     private $queryBuilder;
