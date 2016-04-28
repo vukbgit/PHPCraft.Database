@@ -9,7 +9,7 @@ use PHPCraft\Database\QueryBuilderInterface;
  *
  * @author vuk <info@vuk.bg.it>
  */
-class QueryBuilderPixieAdapter implements QueryBuilderInterface
+class QueryBuilderPixieAdapter extends QueryBuilder
 {
 
     private $queryBuilder;
@@ -130,4 +130,16 @@ class QueryBuilderPixieAdapter implements QueryBuilderInterface
         if($this->fetchMode) $this->query->setFetchMode($this->fetchMode);
         return $this->query->get();
     }
+    
+    /**
+     * execs an insert statement
+     * @param array $fields keys are fields names, values are fields values to be saved
+     * @return mixed $primary key value of inserted record
+     **/
+    public function insert($fields)
+    {
+        return $this->query->insert($fields);
+    }
+    
+    
 }
