@@ -1,1 +1,1 @@
-Database query builder interface and concrete class using [Pixie](https://github.com/usmanhalalit/pixie)
+Database query builder interface and one concrete class using [Pixie](https://github.com/usmanhalalit/pixie)
