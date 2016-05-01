@@ -1,7 +1,7 @@
 {
     "name": "phpcraft/database",
     "type": "library",
-    "description": "database query builder wrapper",
+    "description": "database query builder adapter",
     "license": "MIT",
     "authors": [
 	{
