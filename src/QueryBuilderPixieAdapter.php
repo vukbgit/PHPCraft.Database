@@ -60,26 +60,6 @@ class QueryBuilderPixieAdapter extends QueryBuilder
     }
     
     /**
-     * sets table/view
-     *
-     * @param string $table table or view name
-     **/
-    public function table($table)
-    {
-        $this->query = $this->queryBuilder->table($table);
-    }
-    
-    /**
-     * sets table/view fields to be extracted
-     *
-     * @param array $fields
-     **/
-    public function fields($fields)
-    {
-        $this->query->select($fields);
-    }
-    
-    /**
      * outputs query (for debugging purpose)
      **/
     public function outputQuery()
@@ -94,12 +74,35 @@ class QueryBuilderPixieAdapter extends QueryBuilder
     {
         $this->outputQuery();
     }
-
+    
+    /**
+     * sets table/view
+     * @param string $table table or view name
+     * @return Pixie\QueryBuilder\QueryBuilderHandler ($this->query)
+     **/
+    public function table($table)
+    {
+        $this->query = $this->queryBuilder->table($table);
+        return $this->query;
+    }
+    
+    /**
+     * sets table/view fields to be extracted
+     * @param array $fields
+     * @return Pixie\QueryBuilder\QueryBuilderHandler ($this->query)
+     **/
+    public function fields($fields)
+    {
+        $this->query->select($fields);
+        return $this->query;
+    }
+    
     /**
      * sets a where condition
      * @param string $field
      * @param string $operator
      * @param mixed $value
+     * @return Pixie\QueryBuilder\QueryBuilderHandler ($this->query)
      **/
     public function where($field, $operator = null, $value = null)
     {
@@ -109,6 +112,7 @@ class QueryBuilderPixieAdapter extends QueryBuilder
             $operator = '=';
         }
         $this->query->where($field, $operator, $value);
+        return $this->query;
     }
     
     /**
@@ -120,10 +124,12 @@ class QueryBuilderPixieAdapter extends QueryBuilder
     public function orderBy($field, $direction)
     {
         $this->query->orderBy($field, $direction);
+        return $this->query;
     }
     
     /**
      * execs a get statement
+     * @return array of records
      **/
     public function get()
     {
@@ -133,8 +139,8 @@ class QueryBuilderPixieAdapter extends QueryBuilder
     
     /**
      * execs an insert statement
-     * @param array $fields keys are fields names, values are fields values to be saved
-     * @return mixed $primary key value of inserted record
+     * @param array $fields keys are fields names, values are fields values to be saved. In case array has two dimensions a batch insert is performed and an array of ids is returned
+     * @return array|string $primary key value of inserted record(s)
      **/
     public function insert($fields)
     {
@@ -144,6 +150,7 @@ class QueryBuilderPixieAdapter extends QueryBuilder
     /**
      * execs an update statement
      * @param array $fields keys are fields names, values are fields values to be saved
+     * @return unclear...
      **/
     public function update($fields)
     {
@@ -153,6 +160,7 @@ class QueryBuilderPixieAdapter extends QueryBuilder
     /**
      * execs a delete statement
      * @param array $fields to be used for where condition keys are fields names, values are fields values
+     * @throws Exception if no where conditions has been passed by means of $fields
      **/
     public function delete($fields)
     {
