@@ -116,6 +116,18 @@ class QueryBuilderPixieAdapter extends QueryBuilder
     }
     
     /**
+     * sets a where IN condition 
+     * @param string $field
+     * @param array $values
+     * @return Pixie\QueryBuilder\QueryBuilderHandler ($this->query)
+     **/
+    public function whereIn($field, $values)
+    {
+        $this->query->whereIn($field, $values);
+        return $this->query;
+    }
+    
+    /**
      * orders query
      * @param string $field
      * @param string $direction

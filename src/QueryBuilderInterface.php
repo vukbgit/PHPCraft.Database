@@ -64,6 +64,13 @@ interface QueryBuilderInterface
     public function where($field, $operator = null, $value = null);
     
     /**
+     * sets a where IN condition 
+     * @param string $field
+     * @param array $values
+     **/
+    public function whereIn($field, $values);
+    
+    /**
      * orders query
      * @param string $field
      * @param string $direction
