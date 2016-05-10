@@ -98,6 +98,16 @@ class QueryBuilderPixieAdapter extends QueryBuilder
     }
     
     /**
+     * builds a raw parameter (not to be enclosed by quotes)
+     * @param string $value
+     * @return Pixie\QueryBuilder\Raw
+     **/
+    public function raw($value)
+    {
+        return $this->queryBuilder->raw($value);
+    }    
+    
+    /**
      * sets a where condition
      * @param string $field
      * @param string $operator
