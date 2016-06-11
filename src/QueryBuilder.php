@@ -28,7 +28,7 @@ abstract class QueryBuilder implements QueryBuilderInterface
         switch($sqlstate) {
             //Integrity constraint violation
             case '23000':
-                //foreign key?
+                //foreign key
                 //extract table which holds the foreign key, it is always one even in the case of multiple table foreign key
                 $pattern = '/a foreign key constraint fails \(`[a-zA-Z0-9_]+`.`([a-zA-Z0-9_]+)`/';
                 preg_match($pattern,$message,$matches);
@@ -37,12 +37,20 @@ abstract class QueryBuilder implements QueryBuilderInterface
                     $error = array('integrity_constraint_violation_foreign_key',$matches[1]);
                     break;
                 }
-                //duplicate entry?
+                //duplicate entry
                 $pattern = '/Duplicate entry \'[ a-zA-Z0-9_-]+\' for key \'([a-zA-Z0-9_]+)\'/';
                 preg_match($pattern,$message,$matches);
                 if(!empty($matches)) {
                     //$matches[1] = key name
                     $error = array('integrity_constraint_violation_duplicate_entry',$matches[1]);
+                    break;
+                }
+                //non null column
+                $pattern = '/Column \'([ a-zA-Z0-9_-]+)\' cannot be null/';
+                preg_match($pattern,$message,$matches);
+                if(!empty($matches)) {
+                    //$matches[1] = key name
+                    $error = array('integrity_constraint_violation_non_null_column',$matches[1]);
                     break;
                 }
             break;
