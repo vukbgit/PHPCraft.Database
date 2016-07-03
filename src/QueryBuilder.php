@@ -61,7 +61,7 @@ abstract class QueryBuilder implements QueryBuilderInterface
                 $error = array('column_not_found',$matches[1]);
             break;
             default:
-                throw new Exception(sprintf('SQL error code \'%s\' not handled with message\'%s\'',$sqlstate,$message));
+                throw new \DomainException(sprintf('SQL error code \'%s\' not handled with message\'%s\'',$sqlstate,$message));
             break;
         }
         return $error;
