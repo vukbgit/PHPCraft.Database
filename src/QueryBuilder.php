@@ -18,7 +18,7 @@ abstract class QueryBuilder implements QueryBuilderInterface
     *
     * @throws DomainException if there is no logic defined to handle $sqlstate
     *
-    * @return array|null first array element is the type of error, following elements are relevant informations according to error type
+    * @return array|null first array element is the type of error or false if error is not handled, following elements are relevant informations according to error type
     */
     public function handleQueryException($exception)
     {
@@ -61,7 +61,8 @@ abstract class QueryBuilder implements QueryBuilderInterface
                 $error = array('column_not_found',$matches[1]);
             break;
             default:
-                throw new \DomainException(sprintf('SQL error code \'%s\' not handled with message\'%s\'',$sqlstate,$message));
+                //throw new \DomainException(sprintf('SQL error code \'%s\' not handled with message\'%s\'',$sqlstate,$message));
+                $error = array(false,$message);
             break;
         }
         return $error;
