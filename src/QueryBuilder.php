@@ -38,7 +38,7 @@ abstract class QueryBuilder implements QueryBuilderInterface
                     break;
                 }
                 //duplicate entry
-                $pattern = '/Duplicate entry \'[ a-zA-Z0-9_-]+\' for key \'([a-zA-Z0-9_]+)\'/';
+                $pattern = '/Duplicate entry \'[^\']+\' for key \'([a-zA-Z0-9_]+)\'/';
                 preg_match($pattern,$message,$matches);
                 if(!empty($matches)) {
                     //$matches[1] = key name
