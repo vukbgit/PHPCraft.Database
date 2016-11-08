@@ -138,6 +138,17 @@ class PixieAdapter extends QueryBuilder
     }
     
     /**
+     * sets a limit condition 
+     * @param int $limit
+     * @return Pixie\QueryBuilder\QueryBuilderHandler ($this->query)
+     **/
+    public function limit($limit)
+    {
+        $this->query->limit($limit);
+        return $this->query;
+    }
+    
+    /**
      * orders query
      * @param string $field
      * @param string $direction
