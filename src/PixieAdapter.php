@@ -171,6 +171,17 @@ class PixieAdapter extends QueryBuilder
     }
     
     /**
+     * execs a get statement using a raw query
+     * @param string $sql raw sql with option ? placeholders for parameters
+     * @param array $parameters
+     * @return array of records
+     **/
+    public function getRaw($sql, $parameters = [])
+    {
+        return $this->query->query($sql, $parameters);
+    }
+    
+    /**
      * execs an insert statement
      * @param array $fields keys are fields names, values are fields values to be saved. In case array has two dimensions a batch insert is performed and an array of ids is returned
      * @return array|string $primary key value of inserted record(s)
