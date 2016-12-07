@@ -178,7 +178,7 @@ class PixieAdapter extends QueryBuilder
      **/
     public function getRaw($sql, $parameters = [])
     {
-        return $this->query->query($sql, $parameters);
+        return $this->queryBuilder->query($sql, $parameters)->get();
     }
     
     /**
