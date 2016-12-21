@@ -5,7 +5,7 @@ namespace PHPCraft\Database;
 use PHPCraft\Database\QueryBuilderInterface;
 
 /**
- * Renders template using Twig (http://twig.sensiolabs.org/)
+ * Query builder abstract class
  *
  * @author vuk <info@vuk.bg.it>
  */
