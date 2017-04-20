@@ -60,6 +60,12 @@ abstract class QueryBuilder implements QueryBuilderInterface
                 preg_match($pattern,$message,$matches);
                 $error = array('column_not_found',$matches[1]);
             break;
+            //unique violation
+            case '23505':
+                $pattern = '/Key \(([a-zA-Z0-9_]+)\)/';
+                preg_match($pattern,$message,$matches);
+                $error = array('integrity_constraint_violation_duplicate_entry',$matches[1]);
+            break;
             default:
                 //throw new \DomainException(sprintf('SQL error code \'%s\' not handled with message\'%s\'',$sqlstate,$message));
                 $error = array(false,$message);
