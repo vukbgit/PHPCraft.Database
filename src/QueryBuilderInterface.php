@@ -25,6 +25,11 @@ interface QueryBuilderInterface
     public function connect($driver, $host, $database, $username, $password, $charset = false, $collation = false, $options = array());
     
     /**
+     * checks whether connected to database
+     **/
+    public function isConnected();
+    
+    /**
      * sets fetch method to be used by PDO
      *
      * @param string $mode, one of PDO predefined constants

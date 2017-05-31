@@ -50,6 +50,16 @@ class PixieAdapter extends QueryBuilder
     }
     
     /**
+     * Checks whether connected to database
+     * @param string $propertyName
+     * @throws Exception if property is not related to a used trait ('has' prefix) end it's not set
+     **/
+    public function isConnected()
+    {
+        return $this->queryBuilder !== null;
+    }
+    
+    /**
      * sets fetch method to be used by PDO
      *
      * @param string $mode, one of PDO predefined constants
@@ -82,6 +92,9 @@ class PixieAdapter extends QueryBuilder
      **/
     public function table($table)
     {
+        if(!$this->isConnected()) {
+            throw new \Exception('not connected to database');
+        }
         $this->query = $this->queryBuilder->table($table);
         return $this->query;
     }
