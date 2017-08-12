@@ -184,6 +184,17 @@ class PixieAdapter extends QueryBuilder
     }
     
     /**
+     * execs a raw statement using a raw query
+     * @param string $sql raw sql with option ? placeholders for parameters
+     * @param array $parameters
+     * @return array of records
+     **/
+    public function execRaw($sql, $parameters = [])
+    {
+        return $this->queryBuilder->query($sql, $parameters);
+    }
+    
+    /**
      * execs a get statement using a raw query
      * @param string $sql raw sql with option ? placeholders for parameters
      * @param array $parameters
