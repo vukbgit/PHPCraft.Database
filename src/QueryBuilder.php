@@ -11,6 +11,11 @@ use PHPCraft\Database\QueryBuilderInterface;
  */
 abstract class QueryBuilder implements QueryBuilderInterface
 {
+    /*
+    * array with all database configuration
+    */
+    private $config;
+    
     /**
     * handles error exceptions, for a list of SQLSTATES see for example https://docs.oracle.com/cd/F49540_01/DOC/server.815/a58231/appd.htm
     *
