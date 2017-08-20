@@ -62,8 +62,11 @@ abstract class QueryBuilder implements QueryBuilderInterface
             break;
             //unique violation
             case '23505':
+                r($message);
                 $pattern = '/Key \(([a-zA-Z0-9_]+)\)/';
                 preg_match($pattern,$message,$matches);
+                r($matches);
+                exit;
                 $error = array('integrity_constraint_violation_duplicate_entry',$matches[1]);
             break;
             //foreign key violation
