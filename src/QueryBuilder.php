@@ -63,7 +63,14 @@ abstract class QueryBuilder implements QueryBuilderInterface
             //unique violation
             case '23505':
                 r($message);
-                $pattern = '/Key \(([a-zA-Z0-9_]+)\)/';
+                switch($this->driver) {
+                    case 'mysql':
+                        $pattern = '/Key \(([a-zA-Z0-9_]+)\)/';
+                    break;
+                    case 'pgsql':
+                        $pattern = '/Key \(([a-zA-Z0-9_]+)\)/';
+                    break;
+                }
                 preg_match($pattern,$message,$matches);
                 r($matches);
                 exit;
