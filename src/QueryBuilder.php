@@ -11,6 +11,11 @@ use PHPCraft\Database\QueryBuilderInterface;
  */
 abstract class QueryBuilder implements QueryBuilderInterface
 {
+    /*
+    * array with all database configuration
+    */
+    protected $config;
+    
     /**
     * handles error exceptions, for a list of SQLSTATES see for example https://docs.oracle.com/cd/F49540_01/DOC/server.815/a58231/appd.htm
     *
@@ -62,7 +67,14 @@ abstract class QueryBuilder implements QueryBuilderInterface
             break;
             //unique violation
             case '23505':
-                $pattern = '/Key \(([a-zA-Z0-9_]+)\)/';
+                switch($this->config['driver']) {
+                    case 'mysql':
+                        $pattern = '/Key \(([a-zA-Z0-9_]+)\)/';
+                    break;
+                    case 'pgsql':
+                        $pattern = '/unique constraint "([a-zA-Z0-9_]+)"/';
+                    break;
+                }
                 preg_match($pattern,$message,$matches);
                 $error = array('integrity_constraint_violation_duplicate_entry',$matches[1]);
             break;

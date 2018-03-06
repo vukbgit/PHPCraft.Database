@@ -30,7 +30,7 @@ class PixieAdapter extends QueryBuilder
      **/
     public function connect($driver, $host, $database, $username, $password, $charset = 'utf8', $collation = 'utf8_unicode_ci', $options = array())
     {
-        $config = array(
+        $this->config = array(
                     'driver'    => $driver, // Db driver
                     'host'      => $host,
                     'database'  => $database,
@@ -45,7 +45,7 @@ class PixieAdapter extends QueryBuilder
                     )*/
                     'options'   => $options,
                 );
-        $connection = new \Pixie\Connection($driver, $config);
+        $connection = new \Pixie\Connection($driver, $this->config);
         $this->queryBuilder = new \Pixie\QueryBuilder\QueryBuilderHandler($connection);
     }
     
