@@ -72,18 +72,33 @@ class PixieAdapter extends QueryBuilder
     /**
      * outputs query (for debugging purpose)
      **/
-    public function outputQuery($type = 'select', $dataToBePassed = [], $text = false)
+    public function outputQuery($type = 'select', $dataToBePassed = [])
     {
-        $function = $text ? 'rt' : 'r';
-        $function($this->query->getQuery($type, $dataToBePassed)->getRawSql());
+        r($this->query->getQuery($type, $dataToBePassed)->getRawSql());
     }
     
     /**
      * outputs query (for debugging purpose), shortcut to outputQuery()
      **/
-    public function oq()
+    public function oq($type = 'select', $dataToBePassed = [])
     {
-        $this->outputQuery();
+        $this->outputQuery($type, $dataToBePassed);
+    }
+    
+    /**
+     * outputs query in pure text (for debugging purpose in ajax context)
+     **/
+    public function outputQueryText($type = 'select', $dataToBePassed = [])
+    {
+        rt($this->query->getQuery($type, $dataToBePassed)->getRawSql());
+    }
+    
+    /**
+     * outputs query in pure text (for debugging purpose in ajax context), shortcut to outputQueryText()
+     **/
+    public function oqt($type = 'select', $dataToBePassed = [])
+    {
+        $this->outputQueryText($type, $dataToBePassed);
     }
     
     /**
