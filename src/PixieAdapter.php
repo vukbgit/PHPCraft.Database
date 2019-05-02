@@ -167,6 +167,17 @@ class PixieAdapter extends QueryBuilder
     }
     
     /**
+     * sets a where NULL condition
+     * @param string $field
+     * @return Pixie\QueryBuilder\QueryBuilderHandler ($this->query)
+     **/
+    public function whereNull($field)
+    {
+        $this->query->whereNull($field);
+        return $this->query;
+    }
+    
+    /**
      * sets a limit condition 
      * @param int $limit
      * @return Pixie\QueryBuilder\QueryBuilderHandler ($this->query)
