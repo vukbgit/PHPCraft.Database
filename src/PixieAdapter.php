@@ -184,7 +184,6 @@ class PixieAdapter extends QueryBuilder
     }
 
     /**
-<<<<<<< Updated upstream
      * sets a where NULL condition
      * @param string $field
      * @return Pixie\QueryBuilder\QueryBuilderHandler ($this->query)
@@ -197,9 +196,7 @@ class PixieAdapter extends QueryBuilder
     
     /**
      * sets a limit condition 
-=======
      * sets a limit condition
->>>>>>> Stashed changes
      * @param int $limit
      * @return Pixie\QueryBuilder\QueryBuilderHandler ($this->query)
      **/
