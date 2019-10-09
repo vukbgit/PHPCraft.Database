@@ -12,10 +12,11 @@ use PHPCraft\Database\QueryBuilderInterface;
 class PixieAdapter extends QueryBuilder
 {
 
+    private $connection;
     private $queryBuilder;
     private $query;
     private $fetchMode;
-    
+
     /**
      * connects to database
      *
@@ -45,10 +46,10 @@ class PixieAdapter extends QueryBuilder
                     )*/
                     'options'   => $options,
                 );
-        $connection = new \Pixie\Connection($driver, $this->config);
-        $this->queryBuilder = new \Pixie\QueryBuilder\QueryBuilderHandler($connection);
+        $this->connection = new \Pixie\Connection($driver, $this->config);
+        $this->queryBuilder = new \Pixie\QueryBuilder\QueryBuilderHandler($this->connection);
     }
-    
+
     /**
      * Checks whether connected to database
      * @param string $propertyName
@@ -60,6 +61,22 @@ class PixieAdapter extends QueryBuilder
     }
     
     /**
+     * Returns connection
+     **/
+    public function getConnection()
+    {
+        return $this->connection;
+    }
+
+    /**
+     * Returns query builder
+     **/
+    public function getQueryBuilder()
+    {
+        return $this->queryBuilder;
+    }
+
+    /**
      * sets fetch method to be used by PDO
      *
      * @param string $mode, one of PDO predefined constants
@@ -68,7 +85,7 @@ class PixieAdapter extends QueryBuilder
     {
         $this->fetchMode = $mode;
     }
-    
+
     /**
      * outputs query (for debugging purpose)
      **/
@@ -76,7 +93,7 @@ class PixieAdapter extends QueryBuilder
     {
         r($this->query->getQuery($type, $dataToBePassed)->getRawSql());
     }
-    
+
     /**
      * outputs query (for debugging purpose), shortcut to outputQuery()
      **/
@@ -84,7 +101,7 @@ class PixieAdapter extends QueryBuilder
     {
         $this->outputQuery($type, $dataToBePassed);
     }
-    
+
     /**
      * outputs query in pure text (for debugging purpose in ajax context)
      **/
@@ -92,7 +109,7 @@ class PixieAdapter extends QueryBuilder
     {
         rt($this->query->getQuery($type, $dataToBePassed)->getRawSql());
     }
-    
+
     /**
      * outputs query in pure text (for debugging purpose in ajax context), shortcut to outputQueryText()
      **/
@@ -100,7 +117,7 @@ class PixieAdapter extends QueryBuilder
     {
         $this->outputQueryText($type, $dataToBePassed);
     }
-    
+
     /**
      * sets table/view
      * @param string $table table or view name
@@ -114,7 +131,7 @@ class PixieAdapter extends QueryBuilder
         $this->query = $this->queryBuilder->table($table);
         return $this->query;
     }
-    
+
     /**
      * sets table/view fields to be extracted
      * @param array $fields
@@ -125,7 +142,7 @@ class PixieAdapter extends QueryBuilder
         $this->query->select($fields);
         return $this->query;
     }
-    
+
     /**
      * builds a raw parameter (not to be enclosed by quotes)
      * @param string $value
@@ -134,8 +151,8 @@ class PixieAdapter extends QueryBuilder
     public function raw($value)
     {
         return $this->queryBuilder->raw($value);
-    }    
-    
+    }
+
     /**
      * sets a where condition
      * @param string $field
@@ -153,9 +170,9 @@ class PixieAdapter extends QueryBuilder
         $this->query->where($field, $operator, $value);
         return $this->query;
     }
-    
+
     /**
-     * sets a where IN condition 
+     * sets a where IN condition
      * @param string $field
      * @param array $values
      * @return Pixie\QueryBuilder\QueryBuilderHandler ($this->query)
@@ -165,8 +182,9 @@ class PixieAdapter extends QueryBuilder
         $this->query->whereIn($field, $values);
         return $this->query;
     }
-    
+
     /**
+<<<<<<< Updated upstream
      * sets a where NULL condition
      * @param string $field
      * @return Pixie\QueryBuilder\QueryBuilderHandler ($this->query)
@@ -179,6 +197,9 @@ class PixieAdapter extends QueryBuilder
     
     /**
      * sets a limit condition 
+=======
+     * sets a limit condition
+>>>>>>> Stashed changes
      * @param int $limit
      * @return Pixie\QueryBuilder\QueryBuilderHandler ($this->query)
      **/
@@ -187,7 +208,7 @@ class PixieAdapter extends QueryBuilder
         $this->query->limit($limit);
         return $this->query;
     }
-    
+
     /**
      * orders query
      * @param string $field
@@ -199,7 +220,7 @@ class PixieAdapter extends QueryBuilder
         $this->query->orderBy($field, $direction);
         return $this->query;
     }
-    
+
     /**
      * execs a get statement
      * @return array of records
@@ -209,7 +230,7 @@ class PixieAdapter extends QueryBuilder
         if($this->fetchMode) $this->query->setFetchMode($this->fetchMode);
         return $this->query->get();
     }
-    
+
     /**
      * execs a raw statement using a raw query
      * @param string $sql raw sql with option ? placeholders for parameters
@@ -220,7 +241,7 @@ class PixieAdapter extends QueryBuilder
     {
         return $this->queryBuilder->query($sql, $parameters);
     }
-    
+
     /**
      * execs a get statement using a raw query
      * @param string $sql raw sql with option ? placeholders for parameters
@@ -231,7 +252,7 @@ class PixieAdapter extends QueryBuilder
     {
         return $this->queryBuilder->query($sql, $parameters)->get();
     }
-    
+
     /**
      * execs an insert statement
      * @param array $fields keys are fields names, values are fields values to be saved. In case array has two dimensions a batch insert is performed and an array of ids is returned
@@ -241,7 +262,7 @@ class PixieAdapter extends QueryBuilder
     {
         return $this->query->insert($fields);
     }
-    
+
     /**
      * execs an update statement
      * @param array $fields keys are fields names, values are fields values to be saved
@@ -251,7 +272,7 @@ class PixieAdapter extends QueryBuilder
     {
         return $this->query->update($fields);
     }
-    
+
     /**
      * execs a delete statement
      * @param array $fields to be used for where condition keys are fields names, values are fields values
