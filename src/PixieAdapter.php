@@ -170,6 +170,24 @@ class PixieAdapter extends QueryBuilder
         $this->query->where($field, $operator, $value);
         return $this->query;
     }
+    
+    /**
+     * sets an OR where condition
+     * @param string $field
+     * @param string $operator
+     * @param mixed $value
+     * @return Pixie\QueryBuilder\QueryBuilderHandler ($this->query)
+     **/
+    public function orWhere($field, $operator = null, $value = null)
+    {
+        // If two params are given then assume operator is =
+        if (func_num_args() == 2) {
+            $value = $operator;
+            $operator = '=';
+        }
+        $this->query->orWhere($field, $operator, $value);
+        return $this->query;
+    }
 
     /**
      * sets a where IN condition
